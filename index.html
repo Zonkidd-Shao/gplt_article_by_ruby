@@ -6,6 +6,17 @@
   <title>GPLT Ruby 题解</title>
   <meta name="description" content="团队程序设计天梯赛 GPLT 题解，Ruby 语言实现。">
   <meta name="theme-color" content="#6A5ACD">
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem('gplt-theme');
+        var systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = savedTheme || systemTheme;
+      } catch (error) {
+        document.documentElement.dataset.theme = 'light';
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <style>
     :root { --theme-color: #6A5ACD; --code-bg: #f6f7fc; }
@@ -14,20 +25,99 @@
     .markdown-section code { border-radius: 4px; }
     .markdown-section table { display: table; width: 100%; }
     .sidebar-nav > ul > li > p { color: #6A5ACD; font-weight: 700; }
+    #theme-toggle {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 20;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid rgba(106, 90, 205, .25);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .94);
+      color: #4d438f;
+      box-shadow: 0 5px 18px rgba(40, 35, 80, .16);
+      cursor: pointer;
+      font: inherit;
+      font-size: 14px;
+      transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+      backdrop-filter: blur(8px);
+    }
+    #theme-toggle:hover { transform: translateY(-2px); }
+    #theme-toggle:focus-visible { outline: 3px solid rgba(106, 90, 205, .4); outline-offset: 3px; }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+    }
+    html[data-theme="dark"] body { background: #12131a; color: #c8cbd8; }
+    html[data-theme="dark"] .markdown-section { color: #c8cbd8; }
+    html[data-theme="dark"] .markdown-section strong,
+    html[data-theme="dark"] .markdown-section h1,
+    html[data-theme="dark"] .markdown-section h2,
+    html[data-theme="dark"] .markdown-section h3 { color: #e6e8f2; }
+    html[data-theme="dark"] .markdown-section pre,
+    html[data-theme="dark"] .markdown-section code { background: #1c1f2e; border-color: #2a2f4a; }
+    html[data-theme="dark"] .markdown-section a { color: #9b8cff; }
+    html[data-theme="dark"] .sidebar { background: #171a27; }
+    html[data-theme="dark"] .sidebar-nav { color: #c8cbd8; }
+    html[data-theme="dark"] #theme-toggle {
+      border-color: rgba(155, 140, 255, .35);
+      background: rgba(28, 31, 46, .94);
+      color: #d8d2ff;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, .35);
+    }
+    @media (max-width: 600px) {
+      #theme-toggle { right: 16px; bottom: 16px; }
+      #theme-toggle .theme-label { display: none; }
+      #theme-toggle { width: 42px; justify-content: center; padding: 0; }
+    }
+    /* Keep the page readable when a theme is selected before Docsify renders. */
+    @media (prefers-reduced-motion: reduce) {
+      #theme-toggle { transition: none; }
+    }
+    /* Legacy system fallback for users without JavaScript. */
     @media (prefers-color-scheme: dark) {
-      body { background: #12131a; color: #c8cbd8; }
-      .markdown-section { color: #c8cbd8; }
-      .markdown-section strong, .markdown-section h1, .markdown-section h2, .markdown-section h3 { color: #e6e8f2; }
-      .markdown-section pre, .markdown-section code { background: #1c1f2e; border-color: #2a2f4a; }
-      .markdown-section a { color: #9b8cff; }
-      .sidebar { background: #171a27; }
-      .sidebar-nav { color: #c8cbd8; }
+      html:not([data-theme]) body { background: #12131a; color: #c8cbd8; }
+      html:not([data-theme]) .markdown-section { color: #c8cbd8; }
+      html:not([data-theme]) .sidebar { background: #171a27; }
     }
   </style>
 </head>
 <body>
   <div id="app">正在加载题解……</div>
+  <button id="theme-toggle" type="button" aria-label="切换到暗色模式" title="切换到暗色模式">
+    <span class="theme-icon" aria-hidden="true">🌙</span>
+    <span class="theme-label">暗色模式</span>
+  </button>
   <script>
+    (function () {
+      var button = document.getElementById('theme-toggle');
+      var root = document.documentElement;
+
+      function updateButton() {
+        var isDark = root.dataset.theme === 'dark';
+        button.querySelector('.theme-icon').textContent = isDark ? '☀️' : '🌙';
+        button.querySelector('.theme-label').textContent = isDark ? '浅色模式' : '暗色模式';
+        button.setAttribute('aria-label', isDark ? '切换到浅色模式' : '切换到暗色模式');
+        button.setAttribute('title', isDark ? '切换到浅色模式' : '切换到暗色模式');
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', isDark ? '#12131a' : '#6A5ACD');
+      }
+
+      updateButton();
+      button.addEventListener('click', function () {
+        var nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = nextTheme;
+        try {
+          localStorage.setItem('gplt-theme', nextTheme);
+        } catch (error) {
+          // The toggle still works when browser storage is unavailable.
+        }
+        updateButton();
+      });
+    })();
+
     window.$docsify = {
       name: 'GPLT · Ruby 题解',
       repo: 'https://github.com/Zonkidd-Shao/gplt_article_by_ruby',
