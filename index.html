@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPLT Ruby 题解</title>
+  <meta name="description" content="团队程序设计天梯赛 GPLT 题解，Ruby 语言实现。">
+  <meta name="theme-color" content="#6A5ACD">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <style>
+    :root { --theme-color: #6A5ACD; --code-bg: #f6f7fc; }
+    .markdown-section h1, .markdown-section h2, .markdown-section h3 { font-weight: 650; }
+    .markdown-section pre { border: 1px solid #e8eaf2; border-radius: 10px; box-shadow: 0 6px 20px rgba(106, 90, 205, .07); }
+    .markdown-section code { border-radius: 4px; }
+    .markdown-section table { display: table; width: 100%; }
+    .sidebar-nav > ul > li > p { color: #6A5ACD; font-weight: 700; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #12131a; color: #c8cbd8; }
+      .markdown-section { color: #c8cbd8; }
+      .markdown-section strong, .markdown-section h1, .markdown-section h2, .markdown-section h3 { color: #e6e8f2; }
+      .markdown-section pre, .markdown-section code { background: #1c1f2e; border-color: #2a2f4a; }
+      .markdown-section a { color: #9b8cff; }
+      .sidebar { background: #171a27; }
+      .sidebar-nav { color: #c8cbd8; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">正在加载题解……</div>
+  <script>
+    window.$docsify = {
+      name: 'GPLT · Ruby 题解',
+      repo: 'https://github.com/Zonkidd-Shao/gplt_article_by_ruby',
+      loadSidebar: true,
+      subMaxLevel: 2,
+      auto2top: true,
+      relativePath: true,
+      homepage: 'README.md',
+      alias: { '/.*/_sidebar.md': '/_sidebar.md' },
+      search: {
+        placeholder: '🔍 搜索题号 / 关键词',
+        depth: 4,
+        noData: '没有找到结果',
+        paths: 'auto'
+      },
+      pagination: {
+        previousText: '上一题',
+        nextText: '下一题',
+        crossChapter: true
+      },
+      copyCode: { buttonText: '复制', errorText: '复制失败', successText: '已复制' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@3/dist/docsify-copy-code.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-pagination@2/dist/docsify-pagination.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-ruby.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-mermaid@2/dist/docsify-mermaid.min.js"></script>
+</body>
+</html>
